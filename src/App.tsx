@@ -1,4 +1,4 @@
-import { IonApp } from '@ionic/react';
+import { IonApp, IonCol, IonContent, IonGrid, IonHeader, IonInput, IonItem, IonLabel, IonRow, IonTitle, IonToolbar, IonButton, IonIcon } from '@ionic/react';
 
 
 /* Core CSS required for Ionic components to work properly */
@@ -20,9 +20,50 @@ import '@ionic/react/css/display.css';
 /* Theme variables */
 import './theme/variables.css';
 
+import { calculatorOutline, refreshOutline } from 'ionicons/icons';
+
 const App: React.FC = () => (
   <IonApp>
-    <h1>Hey there !</h1>
+    <IonHeader>
+      <IonToolbar>
+        <IonTitle>BMI Calculator</IonTitle>
+      </IonToolbar>
+    </IonHeader>
+    <IonContent className="ion-padding">
+      <IonGrid>
+        <IonRow>
+          <IonCol>
+            <IonItem>
+              <IonLabel position="floating">Your Height</IonLabel>
+              <IonInput></IonInput>
+            </IonItem>
+          </IonCol>
+        </IonRow>
+        <IonRow>
+          <IonCol>
+            <IonItem>
+              <IonLabel position="floating">Your Weight</IonLabel>
+              <IonInput></IonInput>
+            </IonItem>
+          </IonCol>
+        </IonRow>
+        <IonRow>
+          <IonCol className="ion-text-left">
+            <IonButton>
+              <IonIcon slot="start" icon={calculatorOutline} />Calculate</IonButton>
+          </IonCol>
+          <IonCol>
+            <IonButton className="ion-text-right">
+              <IonIcon slot="start" icon={refreshOutline} />Reset</IonButton>
+          </IonCol>
+        </IonRow>
+        <IonRow>
+          <IonCol>
+
+          </IonCol>
+        </IonRow>
+      </IonGrid>
+    </IonContent>
   </IonApp>
 );
 
