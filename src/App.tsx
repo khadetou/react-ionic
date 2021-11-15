@@ -1,4 +1,4 @@
-import { IonApp, IonCol, IonContent, IonGrid, IonHeader, IonInput, IonItem, IonLabel, IonRow, IonTitle, IonToolbar, IonButton, IonIcon, IonCard, IonCardContent, IonCardHeader, IonCardTitle } from '@ionic/react';
+import { IonApp, IonCol, IonContent, IonGrid, IonHeader, IonInput, IonItem, IonLabel, IonRow, IonTitle, IonToolbar, IonAlert } from '@ionic/react';
 
 
 /* Core CSS required for Ionic components to work properly */
@@ -30,7 +30,7 @@ const App: React.FC = () => {
   const [calculatedBmiText, setCalculatedBmiText] = useState<string>();
   const weightInputRef = useRef<HTMLIonInputElement>(null);
   const heightInputRef = useRef<HTMLIonInputElement>(null);
-
+  const [showAlert, setShowAlert] = useState(false);
   const resetBmi = () => {
     weightInputRef.current!.value = '';
     heightInputRef.current!.value = '';
@@ -48,7 +48,8 @@ const App: React.FC = () => {
       +enteredHeight <= 0 ||
       +enteredWeight <= 0
     ) {
-      alert('Please enter valid values!');
+
+      setShowAlert(true);
       return;
     }
 
@@ -68,42 +69,53 @@ const App: React.FC = () => {
       interpretation = 'Obese';
     }
 
+    if (isNaN(bmi)) {
 
+      setShowAlert(true);
+      return;
+    }
     setCalculatedBmi(bmi);
     setCalculatedBmiText(interpretation);
 
   };
 
   return (
-    <IonApp>
-      <IonHeader>
-        <IonToolbar>
-          <IonTitle>BMI Calculator</IonTitle>
-        </IonToolbar>
-      </IonHeader>
-      <IonContent className="ion-padding">
-        <IonGrid>
-          <IonRow>
-            <IonCol>
-              <IonItem>
-                <IonLabel position="floating">Your Height</IonLabel>
-                <IonInput ref={heightInputRef}></IonInput>
-              </IonItem>
-            </IonCol>
-          </IonRow>
-          <IonRow>
-            <IonCol>
-              <IonItem>
-                <IonLabel position="floating">Your Weight</IonLabel>
-                <IonInput ref={weightInputRef}></IonInput>
-              </IonItem>
-            </IonCol>
-          </IonRow>
-          <BmiControlle calculateBmi={calculateBmi} resetBmi={resetBmi} />
-          <BmiResult calculatedBmi={calculatedBmi} calculatedBmiText={calculatedBmiText} />
-        </IonGrid>
-      </IonContent>
-    </IonApp>
+    <React.Fragment>
+      <IonAlert
+        isOpen={showAlert}
+        message="Please enter a valid value"
+        buttons={[{ text: 'Okay', handler: () => setShowAlert(false) }]}
+      />
+      <IonApp>
+        <IonHeader>
+          <IonToolbar color="primary">
+            <IonTitle>BMI Calculator</IonTitle>
+          </IonToolbar>
+        </IonHeader>
+        <IonContent className="ion-padding">
+          <IonGrid >
+            <IonRow>
+              <IonCol>
+                <IonItem>
+                  <IonLabel position="floating">Your Height</IonLabel>
+                  <IonInput type="number" ref={heightInputRef}></IonInput>
+                </IonItem>
+              </IonCol>
+            </IonRow>
+            <IonRow>
+              <IonCol>
+                <IonItem>
+                  <IonLabel position="floating">Your Weight</IonLabel>
+                  <IonInput type="number" ref={weightInputRef}></IonInput>
+                </IonItem>
+              </IonCol>
+            </IonRow>
+            <BmiControlle calculateBmi={calculateBmi} resetBmi={resetBmi} />
+            <BmiResult calculatedBmi={calculatedBmi} calculatedBmiText={calculatedBmiText} />
+          </IonGrid>
+        </IonContent>
+      </IonApp>
+    </React.Fragment>
   );
 }
 export default App;
