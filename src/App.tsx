@@ -20,7 +20,6 @@ import '@ionic/react/css/display.css';
 /* Theme variables */
 import './theme/variables.css';
 
-import { calculatorOutline, refreshOutline } from 'ionicons/icons';
 import React, { useRef, useState } from 'react';
 import BmiResult from './components/BmiResult';
 import BmiControlle from './components/BmiControlle';
@@ -29,6 +28,7 @@ import InputControl from './components/InputControl';
 const App: React.FC = () => {
   const [calculatedBmi, setCalculatedBmi] = useState<number>();
   const [calculatedBmiText, setCalculatedBmiText] = useState<string>();
+  const [calcUnits, setCalcUnits] = useState<"mkg" | "flbs">("mkg");
   const weightInputRef = useRef<HTMLIonInputElement>(null);
   const heightInputRef = useRef<HTMLIonInputElement>(null);
   const [showAlert, setShowAlert] = useState(false);
@@ -37,6 +37,11 @@ const App: React.FC = () => {
     heightInputRef.current!.value = '';
     setCalculatedBmi(undefined);
     setCalculatedBmiText(undefined);
+  }
+
+
+  const selectCalcUnits = (units: "mkg" | "flbs") => {
+    setCalcUnits(units);
   }
 
   const calculateBmi = () => {
@@ -97,7 +102,7 @@ const App: React.FC = () => {
           <IonGrid >
             <IonRow>
               <IonCol>
-                <InputControl />
+                <InputControl selectedValue={calcUnits} onSelectValue={selectCalcUnits} />
               </IonCol>
             </IonRow>
 
