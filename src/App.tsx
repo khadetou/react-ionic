@@ -24,6 +24,7 @@ import { calculatorOutline, refreshOutline } from 'ionicons/icons';
 import React, { useRef, useState } from 'react';
 import BmiResult from './components/BmiResult';
 import BmiControlle from './components/BmiControlle';
+import InputControl from './components/InputControl';
 
 const App: React.FC = () => {
   const [calculatedBmi, setCalculatedBmi] = useState<number>();
@@ -94,6 +95,13 @@ const App: React.FC = () => {
         </IonHeader>
         <IonContent className="ion-padding">
           <IonGrid >
+            <IonRow>
+              <IonCol>
+                <InputControl />
+              </IonCol>
+            </IonRow>
+
+
             <IonRow>
               <IonCol>
                 <IonItem>
