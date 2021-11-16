@@ -59,8 +59,12 @@ const App: React.FC = () => {
       return;
     }
 
-    const weight = +enteredWeight;
-    const height = +enteredHeight;
+
+    const convertedWeight = calcUnits === "mkg" ? 1 : 2.2;
+    const convertedHeight = calcUnits === "mkg" ? 1 : 3.28;
+
+    const weight = +enteredWeight / convertedWeight;
+    const height = +enteredHeight / convertedHeight;
 
     const bmi = weight / (height * height);
 
@@ -110,7 +114,7 @@ const App: React.FC = () => {
             <IonRow>
               <IonCol>
                 <IonItem>
-                  <IonLabel position="floating">Your Height</IonLabel>
+                  <IonLabel position="floating">Your Height ({calcUnits === "mkg" ? "meters" : "feet"})</IonLabel>
                   <IonInput type="number" ref={heightInputRef}></IonInput>
                 </IonItem>
               </IonCol>
@@ -118,7 +122,7 @@ const App: React.FC = () => {
             <IonRow>
               <IonCol>
                 <IonItem>
-                  <IonLabel position="floating">Your Weight</IonLabel>
+                  <IonLabel position="floating">Your Weight ({calcUnits === "mkg" ? "kg" : "lbs"})</IonLabel>
                   <IonInput type="number" ref={weightInputRef}></IonInput>
                 </IonItem>
               </IonCol>
