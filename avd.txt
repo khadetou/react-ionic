@@ -1,0 +1,9 @@
+//List avds:
+
+emulator -list-avds
+
+//Start the emulator 
+
+emulator -avd EMULATOR NAME 
+
+	
