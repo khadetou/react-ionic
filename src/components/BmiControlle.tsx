@@ -3,13 +3,13 @@ import { calculatorOutline, refreshOutline } from 'ionicons/icons';
 
 const BmiControlle: React.FC<{ calculateBmi: () => void, resetBmi: () => void; }> = (props) => {
     return (
-        <IonRow>
-            <IonCol className="ion-text-left">
-                <IonButton onClick={props.calculateBmi}>
+        <IonRow className="ion-margin-top">
+            <IonCol size="12" sizeMd="6" className="ion-text-center">
+                <IonButton expand="block" onClick={props.calculateBmi}>
                     <IonIcon slot="start" icon={calculatorOutline} />Calculate</IonButton>
             </IonCol>
-            <IonCol>
-                <IonButton onClick={props.resetBmi} className="ion-text-right">
+            <IonCol size="12" sizeMd="6" className="ion-text-center">
+                <IonButton fill="outline" onClick={props.resetBmi}>
                     <IonIcon slot="start" icon={refreshOutline} />Reset</IonButton>
             </IonCol>
         </IonRow>

@@ -1,0 +1,15 @@
+#card {
+  background: black;
+  color: white;
+}
+
+ion-card-title {
+  font-size: 1.8374rem;
+  margin: 1.5rem 0;
+  font-weight: bold;
+  color: white;
+}
+
+#card p {
+  font-size: 1.5rem;
+}

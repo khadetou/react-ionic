@@ -6,4 +6,5 @@ emulator -list-avds
 
 emulator -avd EMULATOR NAME 
 
-	
+//Open our project in android studio
+npx cap open android	
